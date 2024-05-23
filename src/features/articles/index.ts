@@ -3,6 +3,23 @@ import axios from 'axios';
 import { BASE_URL } from '../../utils/constants';
 import { ArticlesInitState } from '../../utils/types';
 
+//Function create article. Payload contains data of article
+export const createArticle = createAsyncThunk(
+  'articles/createArticle',
+  async (payload) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/articles`, payload, {
+        params: {
+          key: '1854d230',
+        },
+      });
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
 export const getArticles = createAsyncThunk(
   'articles/getArticles',
   async () => {
@@ -18,6 +35,7 @@ export const getArticles = createAsyncThunk(
     }
   }
 );
+
 const initialState: ArticlesInitState = {
   list: [],
   filtered: [],
